@@ -1,0 +1,30 @@
+{
+    "builders":[
+        {
+            "type": "digitalocean",
+            "api_token": "{{user `api_token`}}",
+            "size": "512mb",
+            "image": "ubuntu-17-04-x64",
+            "ssh_username": "root",
+            "region": "nyc3",
+            "snapshot_name": "ubuntu-17-{{uuid}}"
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "configs/",
+            "destination": "/tmp"
+        },
+
+        {
+            "type": "shell",
+            "scripts": [
+                "scripts/configure_nginx.sh"
+            ]
+        }
+    ]
+
+    
+}
